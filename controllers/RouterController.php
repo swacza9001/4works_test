@@ -1,33 +1,36 @@
 <?php
 
 class RouterController extends Controller {
-    
+
     protected Controller $controller;
+
     /**
      * 
      * @param array $parameters parametry v URL
      * @return void
      */
-    public function process(array $parameters): void {  
-                $userManager = new UserManager();
+    public function process(array $parameters): void {
+        //kontrola práv uživatele
+        $userManager = new UserManager();
         $user = $userManager->getUser();
         $this->data['admin'] = $user && $user['admin'];
-//naparsování URL
-        $parsedURL = $this->parseURL($parameters[0]);
         
+        //naparsování URL
+        $parsedURL = $this->parseURL($parameters[0]);
+
         //směrování na úvodní stránku
         if (empty($parsedURL[0]))
-            $this->reroute('products'); 
+            $this->reroute('products');
         //vyvolání potřebného kontroleru
         $controllerClass = $this->dashToCamel(array_shift($parsedURL)) . 'Controller';
         if (file_exists('controllers/' . $controllerClass . '.php'))
-                $this->controller = new $controllerClass;
+            $this->controller = new $controllerClass;
         else
             $this->reroute('error');
         
+        //vyvolání hlavní funkce každého kontroleru
         $this->controller->process($parsedURL);
-        
-        
+
         //předání dat
         $this->data['title'] = $this->controller->header['title'];
         $this->data['description'] = $this->controller->header['description'];
@@ -35,6 +38,7 @@ class RouterController extends Controller {
         $this->data['messages'] = $this->getMessages();
         $this->view = 'template';
     }
+
     /**
      * parsování URL na vhodný formát
      * @param string $url URL stránky 
@@ -47,6 +51,7 @@ class RouterController extends Controller {
         $explodedPath = explode("/", $parsedURL["path"]);
         return $explodedPath;
     }
+
     /**
      * úprava textu na formát potřebný k vyvolání kontroleru
      * @param string $text
@@ -58,5 +63,5 @@ class RouterController extends Controller {
         $sentence = str_replace(' ', '', $sentence);
         return $sentence;
     }
-    
+
 }

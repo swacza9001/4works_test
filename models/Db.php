@@ -52,29 +52,6 @@ class Db {
         return $return->fetchAll();
     }
 
-    /**
-     * volání databáze pro jeden sloupec
-     * @param string $query string SQL dotazu
-     * @param array $parameters parametry dotazu
-     * @return array|bool
-     */
-    public static function fetchColumn(string $query, array $parameters = array()): array|bool {
-        $return = self::$connection->prepare($query);
-        $return->execute($parameters);
-        return $return->fetchAll(PDO::FETCH_COLUMN);
-    }
-
-    /**
-     * volání databáze pro více výsledků, zjednodušené asociativní pole
-     * @param string $query string SQL dotazu
-     * @param array $parameters parametry dotazu
-     * @return array|bool
-     */
-    public static function fetchAssociated(string $query, array $parameters = array()): array|bool {
-        $return = self::$connection->prepare($query);
-        $return->execute($parameters);
-        return $return->fetchAll(PDO::FETCH_ASSOC);
-    }
 
     /**
      * volání databáze pro počet ovlivněných řádků

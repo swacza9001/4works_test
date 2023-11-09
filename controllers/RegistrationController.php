@@ -9,6 +9,7 @@ class RegistrationController extends Controller {
     public function process(array $parameters): void {
         $this->header['title'] = 'Registrace';
         
+        //uložení nového uživatele do DB a jeho přihlášení
         if($_POST) {
             try {
                 $userManager = new UserManager();
@@ -21,6 +22,7 @@ class RegistrationController extends Controller {
             }
         }
         
+        //výběr pohledu
         $this->view = 'registration';
     }
     

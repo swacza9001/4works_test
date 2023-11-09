@@ -13,11 +13,12 @@ class AdministrationController extends Controller {
         
         $userManager = new UserManager();
         
+        // odhlášení uživatele
         if(!empty($parameters[0]) && $parameters[0] == 'logOut') {
             $userManager->logOut();
             $this->reroute('logIn');
         }
-        
+        //uložení uživatele do proměnné předávající data do pohledů
         $user = $userManager->getUser();
         $this->data['username'] = $user['username'];
         $this->data['admin'] = $user['admin'];
