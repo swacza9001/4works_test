@@ -28,10 +28,15 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="products">Všechny produkty</a>
                         </li>
+                        <?php if ($admin):?>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="editor">Vložit produkt</a>
+                        </li>
+                        <?php endif ; ?>
                     </ul>
                     <form class="d-flex ms-auto" role="search" method="post">
                         <input class="form-control me-2" type="search" name="search" placeholder="Vyhledávání" aria-label="vyhledávání">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-outline-success" type="submit">Vyhledat</button>
                     </form>
                 </div>
             </nav>

@@ -25,15 +25,20 @@ class ProductsController extends Controller {
             $this->view = "product";
         } else {
 
-            if (isset($_SESSION['search'])) {
+            if (isset($_POST['search'])) {
                 $searchQuery = [];
-                $searchQuery[] = $_SESSION['search'];
+                $searchQuery[] = $_POST['search'];
                 $this->data['products'] = $productManager->searchForProduct($searchQuery);
                 $paths = $productManager->getPaths();
                 $this->data['first_random_path'] = $this->randomValue($this->getPaths($paths));
                 $this->data['second_random_path'] = $this->randomValue($this->getPaths($paths));
                 $this->data['third_random_path'] = $this->randomValue($this->getPaths($paths));
-                unset($_SESSION['search']);
+                
+                $this->header = [
+                    "title" => "Vyhledávané produkty: " . $_POST['search'],
+                    "keywords" => "hledání, " . $_POST['search'],
+                    "description" => "Produkty, které hledáte: " . $_POST['search'],
+                ];
             } else {
                 $this->data['products'] = $productManager->getAllProducts();
 

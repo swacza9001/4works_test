@@ -78,7 +78,7 @@ class EditorController extends Controller {
                     return $targetFile;
                 }
             }
-        } else {
+        } else if ((!in_array($file['extension'], $validExtensions)) && ($file['name'] !== "")) {
             $this->addMessage('danger', 'Špatný formát obrázku. Povolené: jpg, jpeg, png.');
         }
 

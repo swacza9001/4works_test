@@ -23,13 +23,15 @@ class ProductManager {
         return Db::update('products', $productInfo, 'WHERE product_id = ?', array($id));
     }
     
-    public function searchForProduct (array $whatFor) : array {
-        return Db::queryAll("SELECT * "
-                . "FROM products "
-                . "WHERE MATCH(name, description) "
-                . "AGAINST (?)", 
-                array_values($whatFor));
-    }
+    public function searchForProduct(array $whatFor): array {
+    $searchTerm = $whatFor[0]; // Assuming the search term is the first element in the array
+
+    return Db::queryAll("SELECT * "
+            . "FROM products "
+            . "WHERE name LIKE ? OR description LIKE ?", 
+            array("%" . $searchTerm . "%", "%" . $searchTerm . "%"));
+}
+
     
     public function getPaths(): array {
         return Db::queryAll('SELECT image_path '

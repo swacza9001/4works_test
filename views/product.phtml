@@ -11,3 +11,11 @@
         <img class="img-fluid" src="<?= $product['image_path'] ?>">
     </div>
 </div>
+<?php if($admin): ?>
+<div class="row">
+    <div class="text-center">
+        <a href="editor/<?= $product['product_id'] ?>">Upravit</a> |
+        <a href="products/<?= $product['product_id'] ?>/delete">Odstranit</a>
+    </div>
+</div>
+<?php endif; ?>

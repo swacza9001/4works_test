@@ -9,7 +9,10 @@ class RouterController extends Controller {
      * @return void
      */
     public function process(array $parameters): void {  
-        //naparsování URL
+                $userManager = new UserManager();
+        $user = $userManager->getUser();
+        $this->data['admin'] = $user && $user['admin'];
+//naparsování URL
         $parsedURL = $this->parseURL($parameters[0]);
         
         //směrování na úvodní stránku
@@ -24,9 +27,6 @@ class RouterController extends Controller {
         
         $this->controller->process($parsedURL);
         
-        if (isset($_POST['search'])) {
-            $_SESSION['search'] = $_POST['search'];
-        }
         
         //předání dat
         $this->data['title'] = $this->controller->header['title'];
