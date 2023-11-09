@@ -1,0 +1,50 @@
+<div id="carouselInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="3000">
+            <img style="max-height: 30rem" src="<?= $first_random_path ?>" class="d-block mx-auto">
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+            <img style="max-height: 30rem" src="<?= $second_random_path ?>" class="d-block mx-auto">
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+            <img style="max-height: 30rem" src="<?= $third_random_path ?>" class="d-block mx-auto">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselInterval" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselInterval" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<h2>Všechny produkty</h2>
+
+<div class="row">
+ 
+        <?php foreach ($products as $product) : ?>
+            <div class="col-xxl-4 col-xl-6">
+                <div class="card mb-3" style="height: 35rem; width: 22rem">
+
+                    <img src="<?= $product['image_path'] ?>" class="card-img-top img-fluid m-2" style="max-width: 20rem">
+
+                    <div class="card-body">
+                        <h5 class="card-title mb-5"><?= $product['name'] ?></h5>
+                        <div class="text-center">
+                            <a href="products/<?= $product['product_id'] ?>" class="btn btn-primary">Detail</a>
+                        </div>
+                        <?php if ($admin): ?>
+                            <div class="card-footer w-100 position-absolute bottom-0 start-0 text-center">
+                                <a href="editor/<?= $product['product_id'] ?>">Upravit</a> |
+                                <a href="products/<?= $product['product_id'] ?>/delete">Odstranit</a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
+
+</div>

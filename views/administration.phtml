@@ -1,0 +1,14 @@
+<p>Vítejte v administraci, jste přihlášeni jako <?=$username?>.</p>
+
+<?php if (!$admin): ?>
+<p>Nemáte administrátorská oprávnění, požádejte administrátora, aby vám je přidělil.</p>
+<?php endif; ?>
+
+<?php if ($admin):?>
+<h4><a href="editor">Přidání produktu</a></h4>
+<?php endif; ?>
+
+<h4><a href="products">Seznam zboží</a></h4>
+<h4><a href="administration/logOut">Odhlásit</a></h4>
+
+
